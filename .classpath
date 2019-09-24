@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="lab1/src/test/java"/>
 	<classpathentry kind="src" path="lab1/src/main/java"/>
 	<classpathentry kind="var" path="MAVEN_REPOSITORY/org/junit/jupiter/junit-jupiter-api/5.5.2/junit-jupiter-api-5.5.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.junit.jupiter:junit-jupiter-engine:5.5.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.junit.platform:junit-platform-launcher:1.5.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.junit.vintage:junit-vintage-engine:5.5.2"/>
 	<classpathentry kind="output" path="out/production/java-inside"/>
 </classpath>
