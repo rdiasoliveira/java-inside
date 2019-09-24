@@ -1,3 +1,0 @@
-Le premier fichier test sur IntelliJ :)
-
-Je change le contenu du fichier x)
