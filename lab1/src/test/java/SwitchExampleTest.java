@@ -13,4 +13,5 @@ public class SwitchExampleTest {
     public void testSwitchExample2() {
         assertEquals(2, SwitchExample.switchExample("cat"));
     }
+
 }
