@@ -1,8 +1,14 @@
 package fr.umlv.java.inside;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import static java.util.stream.Collectors.joining;
+import static java.util.function.Predicate.not;
+
 
 public class Main {
 
@@ -24,11 +30,28 @@ public class Main {
         return Character.toLowerCase(name.charAt(3)) + name.substring(4);
     }
 
-    public static String toJSON(Object object){
+    public static String toJSON(Object object) {
         return Arrays.stream(object.getClass().getMethods())
                 .filter(method -> method.getName().startsWith("get"))
-                .map(method -> propertyName(method.getName()))
-                .collect(joining(", " , "{", "}"));
+                .filter(not(method -> method.getDeclaringClass() == Object.class))
+                .sorted(Comparator.comparing(Method::getName))
+                .map(method -> propertyName(method.getName()) + " : " + allGetter(object, method))
+                .collect(joining(", ", "{", "}"));
+    }
+
+    private static Object allGetter(Object o, Method getter) {
+        try {
+            return getter.invoke(o);
+        } catch (IllegalAccessException e) {
+            throw new IllegalStateException(e);
+        } catch (InvocationTargetException e) {
+            var cause = e.getCause();
+            if(cause instanceof RuntimeException)
+                throw (RuntimeException) cause;
+            if(cause instanceof Error)
+                throw (Error) cause;
+            throw new UndeclaredThrowableException(cause);
+        }
     }
 
     public static void main(String[] args) {
