@@ -8,6 +8,11 @@ os:
   - linux
   - osx
 
+env:
+    matrix:
+      - TARGET="lab1"
+      - TARGET="lab2"
+
 script:
   - cd lab1
   - mvn package
