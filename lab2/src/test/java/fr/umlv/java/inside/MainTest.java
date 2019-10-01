@@ -21,10 +21,12 @@ class MainTest {
             this.age = age;
         }
 
+        @JSONProperty
         public String getPlanet() {
             return planet;
         }
 
+        @JSONProperty
         public int getAge() {
             return age;
         }
@@ -41,10 +43,12 @@ class MainTest {
             this.lastName = Objects.requireNonNull(lastName);
         }
 
+        @JSONProperty
         public String getFirstName() {
             return firstName;
         }
 
+        @JSONProperty
         public String getLastName() {
             return lastName;
         }

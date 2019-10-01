@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import static java.util.stream.Collectors.joining;
-import static java.util.function.Predicate.not;
+//import static java.util.function.Predicate.not;
 
 
 public class Main {
@@ -32,8 +32,8 @@ public class Main {
 
     public static String toJSON(Object object) {
         return Arrays.stream(object.getClass().getMethods())
-                .filter(method -> method.getName().startsWith("get"))
-                .filter(not(method -> method.getDeclaringClass() == Object.class))
+                .filter(method -> method.getName().startsWith("get") && method.isAnnotationPresent(JSONProperty.class))
+                //.filter(not(method -> method.getDeclaringClass() == Object.class))
                 .sorted(Comparator.comparing(Method::getName))
                 .map(method -> propertyName(method.getName()) + " : " + allGetter(object, method))
                 .collect(joining(", ", "{", "}"));
