@@ -26,6 +26,11 @@ public class Main {
                 "}\n";
     } */
 
+    private static String annotationValue(Method s) {
+        var value = s.getAnnotation(JSONProperty.class).value();
+        return value.isEmpty() ? propertyName(s.getName()) : s.getName();
+    }
+
     private static String propertyName(String name) {
         return Character.toLowerCase(name.charAt(3)) + name.substring(4);
     }
@@ -35,7 +40,7 @@ public class Main {
                 .filter(method -> method.getName().startsWith("get") && method.isAnnotationPresent(JSONProperty.class))
                 //.filter(not(method -> method.getDeclaringClass() == Object.class))
                 .sorted(Comparator.comparing(Method::getName))
-                .map(method -> propertyName(method.getName()) + " : " + allGetter(object, method))
+                .map(method -> annotationValue(method) + " : " + allGetter(object, method))
                 .collect(joining(", ", "{", "}"));
     }
 

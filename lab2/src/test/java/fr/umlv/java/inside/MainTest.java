@@ -2,6 +2,7 @@ package fr.umlv.java.inside;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,6 +55,13 @@ class MainTest {
         }
 
     }
+
+    public final static ClassValue<Method[]> cv = new ClassValue<>() {
+        @Override
+        protected Method[] computeValue(Class<?> type) {
+            return type.getMethods();
+        }
+    };
 
     @Test
     void toJSON() {
