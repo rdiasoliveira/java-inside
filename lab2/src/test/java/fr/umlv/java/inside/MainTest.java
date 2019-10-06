@@ -56,13 +56,6 @@ class MainTest {
 
     }
 
-    public final static ClassValue<Method[]> cv = new ClassValue<>() {
-        @Override
-        protected Method[] computeValue(Class<?> type) {
-            return type.getMethods();
-        }
-    };
-
     @Test
     void toJSON() {
         assertEquals("{firstName : John, lastName : Doe}",

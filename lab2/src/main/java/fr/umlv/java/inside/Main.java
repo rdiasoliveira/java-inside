@@ -26,6 +26,13 @@ public class Main {
                 "}\n";
     } */
 
+    private final static ClassValue<Method[]> cachedMethod = new ClassValue<>() {
+        @Override
+        protected Method[] computeValue(Class<?> getMethodResult) {
+            return getMethodResult.getMethods();
+        }
+    };
+
     private static String annotationValue(Method s) {
         var value = s.getAnnotation(JSONProperty.class).value();
         return value.isEmpty() ? propertyName(s.getName()) : s.getName();
