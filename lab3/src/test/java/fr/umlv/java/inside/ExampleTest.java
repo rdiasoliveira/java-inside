@@ -3,6 +3,7 @@ package fr.umlv.java.inside;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
+
 import static java.lang.invoke.MethodHandles.*;
 import static java.lang.invoke.MethodType.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -93,5 +94,17 @@ class ExampleTest {
         assertEquals((String) methodHandle.invokeExact(Integer.valueOf(8)), "question 8");
     }
 
+    @Test
+    public void anIstanceHello5() throws Throwable{
+        var str = "foo";
+        var methodHandle = publicLookup().findVirtual(String.class,"equals",  methodType(boolean.class, Object.class));
+        var methodHandle1 = guardWithTest(
+                methodHandle.asType(methodType(boolean.class, String.class, String.class)),
+                dropArguments(constant(int.class, 1), 0, String.class, String.class),
+                dropArguments(constant(int.class, -1), 0, String.class, String.class)
+        );
+        methodHandle1 = insertArguments(methodHandle1, 1, str);
+        assertEquals(1, (int) methodHandle1.invokeExact("foo"));
+    }
 
 }
