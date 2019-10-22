@@ -26,3 +26,14 @@ hs_err_pid*
 lab1/target/*
 lab2/target/*
 lab3/target/*
+.DS_Store
+lab2/.DS_Store
+lab3/.DS_Store
+lab3/.idea/.gitignore
+lab3/src/.DS_Store
+lab3/src/test/.DS_Store
+lab3/src/test/java/.DS_Store
+lab3/src/test/java/fr/.DS_Store
+lab3/src/test/java/fr/umlv/.DS_Store
+lab3/src/test/java/fr/umlv/java/.DS_Store
+lab4/target/*
