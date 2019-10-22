@@ -7,8 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LoggerTest {
 
     private static class A {
+
         private static final StringBuilder sb = new StringBuilder();
         private static final Logger logger = Logger.of(A.class, sb::append);
+
     }
 
     @Test
