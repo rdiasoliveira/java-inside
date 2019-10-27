@@ -1,37 +1,34 @@
 package fr.umlv.java.inside;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.function.ToIntFunction;
 import java.util.stream.Stream;
-
-import static fr.umlv.java.inside.StringSwitchExample.stringSwitch;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class StringSwitchExampleTest {
+public class StringSwitchExampleTest {
 
-    @Test
-    void stringSwitchTest() {
-        assertAll(() ->assertEquals(0, stringSwitch("foo")),
-                () -> assertEquals(1, stringSwitch("bar")),
-                () -> assertEquals(2, stringSwitch("bazz")),
-                () ->assertEquals(-1, stringSwitch("wat")));
-    }
+    /* @Test
+    public void stringSwitchTest() {
+        assertAll(() ->assertEquals(0, stringSwitch2("foo")),
+                () -> assertEquals(1, stringSwitch2("bar")),
+                () -> assertEquals(2, stringSwitch2("bazz")),
+                () ->assertEquals(-1, stringSwitch2("wat")));
+    } */
 
     @ParameterizedTest
     @MethodSource("methodString")
-    void stringSwitchTest(ToIntFunction<String> methodString) {
+    public void stringSwitchTest(ToIntFunction<String> methodString) {
         assertAll(() ->assertEquals(0, methodString.applyAsInt("foo")),
                 () -> assertEquals(1, methodString.applyAsInt("bar")),
                 () -> assertEquals(2, methodString.applyAsInt("bazz")),
                 () ->assertEquals(-1, methodString.applyAsInt("wat")));
     }
 
-    static Stream<ToIntFunction<String>> methodString() {
-        return Stream.of(StringSwitchExample::stringSwitch);
+    public static Stream<ToIntFunction<String>> methodString() {
+        return Stream.of(StringSwitchExample::stringSwitch,
+                StringSwitchExample::stringSwitch2,
+                StringSwitchExample::stringSwitch3);
     }
 
 }

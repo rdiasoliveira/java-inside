@@ -4,6 +4,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.invoke.MutableCallSite;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.List;
 
 public class StringSwitchExample {
@@ -33,14 +34,20 @@ public class StringSwitchExample {
         }
     }
 
-    public static int stringSwitch2(String str) throws Throwable {
-        var mh = createMHFromStrings2("foo", "bar", "bazz");
-        return (int) mh.invokeExact(str);
+    public static int stringSwitch2(String str) {
+        try {
+            var mh = createMHFromStrings2("foo", "bar", "bazz");
+            return (int) mh.invokeExact(str);
+        } catch (Error | RuntimeException e) {
+            throw e;
+        } catch (Throwable t) {
+            throw new UndeclaredThrowableException(t);
+        }
     }
 
-    public static MethodHandle createMHFromStrings2(String ... strings) {
+    public static MethodHandle createMHFromStrings2(String... strings) {
         var mh = MethodHandles.dropArguments(MethodHandles.constant(int.class, -1), 0, String.class);
-        for(var i = 0; i < strings.length; i++) {
+        for (var i = 0; i < strings.length; i++) {
             mh = MethodHandles.guardWithTest(
                     MethodHandles.insertArguments(STRINGS_EQUALS, 1, strings[i]),
                     MethodHandles.dropArguments(MethodHandles.constant(int.class, i), 0, String.class),
@@ -49,9 +56,15 @@ public class StringSwitchExample {
         return mh;
     }
 
-    public static int stringSwitch3(String str) throws Throwable {
-        var mh = createMHFromStrings3("foo", "bar", "bazz");
-        return (int) mh.invokeExact(str);
+    public static int stringSwitch3(String str) {
+        try {
+            var mh = createMHFromStrings3("foo", "bar", "bazz");
+            return (int) mh.invokeExact(str);
+        } catch (Error | RuntimeException e) {
+            throw e;
+        } catch (Throwable t) {
+            throw new UndeclaredThrowableException(t);
+        }
     }
 
     public static MethodHandle createMHFromStrings3(String... matches) {
