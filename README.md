@@ -1,4 +1,4 @@
 # Matière Java Inside
-Ce repository contient les sources du Lab1.
+Ce repository contient les sources de plusieurs labs.
 
 Wonderful.
