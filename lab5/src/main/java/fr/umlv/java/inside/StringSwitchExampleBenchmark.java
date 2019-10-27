@@ -18,19 +18,21 @@ public class StringSwitchExampleBenchmark {
             function.applyAsInt("bar");
             function.applyAsInt("baz");
             function.applyAsInt("other");
+            function.applyAsInt("other2");
+            function.applyAsInt("other3");
         }
     }
 
     @Benchmark
-    public void StringSwitch1() {
+    public void stringSwitch() {
         testingFunction(StringSwitchExample::stringSwitch);
     }
     @Benchmark
-    public void StringSwitch2() {
+    public void stringGuardWithTest() {
         testingFunction(StringSwitchExample::stringSwitch2);
     }
     @Benchmark
-    public void StringSwitch3() {
+    public void stringGuardWithTestInlineCache() {
         testingFunction(StringSwitchExample::stringSwitch3);
     }
 
