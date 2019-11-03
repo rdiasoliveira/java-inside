@@ -1,6 +1,5 @@
 package fr.umlv.java.inside;
 
-import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.List;
 
@@ -11,20 +10,22 @@ public class Example1 {
     public static void main(String[] args) {
 
         var scope = new ContinuationScope("hello1");
-        var continuation = new Continuation(scope, () -> {
+
+        /* var continuation = new Continuation(scope, () -> { */
             /* synchronized (lock) {
                 Continuation.yield(scope);
             } */
-            Continuation.yield(scope);
+            /* Continuation.yield(scope);
             System.out.println("hello continuation");
             System.out.println(Continuation.getCurrentContinuation(scope));
             System.out.println(Thread.currentThread());
         });
 
         continuation.run();
-        continuation.run();
+        continuation.run(); */
 
-        /* var continuation1 = new Continuation(scope, () -> {
+        /*
+        var continuation1 = new Continuation(scope, () -> {
             System.out.println("start 1");
             Continuation.yield(scope);
             System.out.println("middle 1");
@@ -47,7 +48,7 @@ public class Example1 {
             if(!c.isDone()) ad.push(c);
         } */
 
-        var scheduler = new Scheduler();
+        var scheduler = new Scheduler(Scheduler.Strategy.FIFO);
         var continuation1 = new Continuation(scope, () -> {
             System.out.println("start 1");
             scheduler.enqueue(scope);
