@@ -1,9 +1,6 @@
 language: java
 jdk: openjdk13
 
-# install:
-#   - mettre une commmande si nécessaire
-
 os:
   - linux
   - osx
@@ -15,7 +12,8 @@ env:
       - TARGET="lab3"
       - TARGET="lab4"
       - TARGET="lab5"
+      - TARGET="lab6"
 
 script:
-  - cd $TARGET
-  - mvn package
+  - chmod u+x travis-script.sh
+  - ./travis-script.sh
