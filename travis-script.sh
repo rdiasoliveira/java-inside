@@ -10,5 +10,6 @@ if ["$TARGET" = "lab6"]; then
     fi
     export JAVA_HOME=$(pwd)/jdk-14-loom/
 fi
+
 cd $TARGET
 mvn clean package
